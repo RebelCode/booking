@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="RebelCode\Bookings\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/codeclimate/php-test-reporter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/args-list-validation" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/callback-abstract" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/collections-interface" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/container-helper-base" />
@@ -36,6 +37,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/php-cs-fixer-config" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/stringable-interface" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/time-interface" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/validation-abstract" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/validation-base" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/validation-interface" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/instantiator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/friendsofphp/php-cs-fixer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/guzzle/guzzle" />
