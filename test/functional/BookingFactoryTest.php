@@ -64,7 +64,7 @@ class BookingFactoryTest extends TestCase
     {
         $subject = new BookingFactory();
 
-        $this->setExpectedException('InvalidArgumentException');
+        $this->setExpectedException('Dhii\Factory\Exception\FactoryExceptionInterface');
 
         $subject->make("invalid-data");
     }
