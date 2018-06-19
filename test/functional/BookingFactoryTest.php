@@ -79,7 +79,7 @@ class BookingFactoryTest extends TestCase
             'end'    => rand(0, time()),
         ];
 
-        $actual = $subject->make($data);
+        $actual = $subject->make(['data' => $data]);
 
         $this->assertEquals($data['id'], $actual->getId());
         $this->assertEquals($data['status'], $actual->getStatus());
