@@ -3,7 +3,14 @@
 namespace RebelCode\Bookings;
 
 use ArrayObject;
+use Dhii\Collection\MapFactoryInterface;
+use Dhii\Data\Container\ContainerFactoryInterface;
+use Dhii\Data\Container\ContainerGetCapableTrait;
+use Dhii\Data\Container\CreateContainerExceptionCapableTrait;
+use Dhii\Data\Container\CreateNotFoundExceptionCapableTrait;
+use Dhii\Data\Object\NormalizeKeyCapableTrait;
 use Dhii\Factory\AbstractBaseCallbackFactory;
+use Psr\Container\NotFoundExceptionInterface;
 use stdClass;
 
 /**
@@ -11,8 +18,20 @@ use stdClass;
  *
  * @since [*next-version*]
  */
-class BookingFactory extends AbstractBaseCallbackFactory implements BookingFactoryInterface
+class BookingFactory extends AbstractBaseCallbackFactory implements BookingFactoryInterface, MapFactoryInterface
 {
+    /* @since [*next-version*] */
+    use ContainerGetCapableTrait;
+
+    /* @since [*next-version*] */
+    use NormalizeKeyCapableTrait;
+
+    /* @since [*next-version*] */
+    use CreateContainerExceptionCapableTrait;
+
+    /* @since [*next-version*] */
+    use CreateNotFoundExceptionCapableTrait;
+
     /**
      * {@inheritdoc}
      *
@@ -35,16 +54,22 @@ class BookingFactory extends AbstractBaseCallbackFactory implements BookingFacto
                 $config = [];
             }
 
-            if (!is_array($config) && !($config instanceof stdClass) && !($config instanceof ArrayObject)) {
+            try {
+                $data = $this->_containerGet($config, ContainerFactoryInterface::K_DATA);
+            } catch (NotFoundExceptionInterface $exception) {
+                $data = [];
+            }
+
+            if (!is_array($data) && !($data instanceof stdClass) && !($data instanceof ArrayObject)) {
                 throw $this->_createInvalidArgumentException(
                     $this->__('Config is not a valid data set'),
                     null,
                     null,
-                    $config
+                    $data
                 );
             }
 
-            return new Booking($config);
+            return new Booking($data);
         };
     }
 }
