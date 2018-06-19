@@ -34,6 +34,18 @@ class BookingFactoryTest extends TestCase
             $subject,
             'Test subject does not implement expected interface.'
         );
+
+        $this->assertInstanceOf(
+            'Dhii\Data\Container\ContainerFactoryInterface',
+            $subject,
+            'Test subject does not implement expected interface.'
+        );
+
+        $this->assertInstanceOf(
+            'Dhii\Collection\MapFactoryInterface',
+            $subject,
+            'Test subject does not implement expected interface.'
+        );
     }
 
     public function testMakeNoData()
