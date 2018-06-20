@@ -2,17 +2,34 @@
 
 namespace RebelCode\Bookings;
 
-use ArrayObject;
+use Dhii\Collection\MapFactoryInterface;
+use Dhii\Data\Container\ContainerFactoryInterface;
+use Dhii\Data\Container\ContainerGetCapableTrait;
+use Dhii\Data\Container\CreateContainerExceptionCapableTrait;
+use Dhii\Data\Container\CreateNotFoundExceptionCapableTrait;
+use Dhii\Data\Object\NormalizeKeyCapableTrait;
 use Dhii\Factory\AbstractBaseCallbackFactory;
-use stdClass;
+use Psr\Container\NotFoundExceptionInterface;
 
 /**
  * Implementation of a booking factory.
  *
  * @since [*next-version*]
  */
-class BookingFactory extends AbstractBaseCallbackFactory implements BookingFactoryInterface
+class BookingFactory extends AbstractBaseCallbackFactory implements BookingFactoryInterface, MapFactoryInterface
 {
+    /* @since [*next-version*] */
+    use ContainerGetCapableTrait;
+
+    /* @since [*next-version*] */
+    use NormalizeKeyCapableTrait;
+
+    /* @since [*next-version*] */
+    use CreateContainerExceptionCapableTrait;
+
+    /* @since [*next-version*] */
+    use CreateNotFoundExceptionCapableTrait;
+
     /**
      * {@inheritdoc}
      *
@@ -35,16 +52,13 @@ class BookingFactory extends AbstractBaseCallbackFactory implements BookingFacto
                 $config = [];
             }
 
-            if (!is_array($config) && !($config instanceof stdClass) && !($config instanceof ArrayObject)) {
-                throw $this->_createInvalidArgumentException(
-                    $this->__('Config is not a valid data set'),
-                    null,
-                    null,
-                    $config
-                );
+            try {
+                $data = $this->_containerGet($config, BookingFactoryInterface::K_DATA);
+            } catch (NotFoundExceptionInterface $exception) {
+                $data = [];
             }
 
-            return new Booking($config);
+            return new Booking($data);
         };
     }
 }

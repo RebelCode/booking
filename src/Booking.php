@@ -2,8 +2,10 @@
 
 namespace RebelCode\Bookings;
 
+use ArrayAccess;
 use ArrayObject;
 use Dhii\Collection\AbstractBaseCountableMap;
+use Dhii\Collection\MapInterface;
 use Dhii\Data\Container\Exception\ContainerException;
 use Dhii\Data\Container\Exception\NotFoundException;
 use Dhii\Data\Object\CreateDataStoreCapableTrait;
@@ -11,6 +13,7 @@ use Dhii\I18n\StringTranslatingTrait;
 use Exception as RootException;
 use Exception;
 use stdClass;
+use Traversable;
 
 /**
  * Concrete implementation of a booking.
@@ -48,7 +51,8 @@ class Booking extends AbstractBaseCountableMap implements BookingInterface
      *
      * @since [*next-version*]
      *
-     * @param array|stdClass|ArrayObject $data The data of the booking.
+     * @param array|stdClass|ArrayObject|MapInterface $data The data of the booking - anything that is both a valid
+     *                                                      container and is also traversable.
      */
     public function __construct($data)
     {
